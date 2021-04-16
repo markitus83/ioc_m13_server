@@ -13,7 +13,7 @@ public class OficinaVisualitzacio {
     private String idOficina;
     private String nom;
     private Categoria tipus;
-    private String capacitat;
+    private Integer capacitat;
     private Double preu;
     private String serveis;
     private Boolean habilitada;
@@ -26,7 +26,7 @@ public class OficinaVisualitzacio {
         String idOficina,
         String nom, 
         Categoria tipus, 
-        String capacitat, 
+        Integer capacitat, 
         Double preu, 
         String serveis, 
         Boolean habilitada, 
@@ -73,11 +73,11 @@ public class OficinaVisualitzacio {
         this.tipus = tipus;
     }
 
-    public String getCapacitat() {
+    public Integer getCapacitat() {
         return capacitat;
     }
 
-    public void setCapaditat(String capacitat) {
+    public void setCapaditat(Integer capacitat) {
         this.capacitat = capacitat;
     }
 

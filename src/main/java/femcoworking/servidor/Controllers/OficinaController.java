@@ -254,7 +254,7 @@ public class OficinaController {
             oficina.setNom(oficinaEditada.getNom());
         }
 
-        if (oficinaEditada.getCapacitat() != null && !oficinaEditada.getCapacitat().isEmpty())
+        if (oficinaEditada.getCapacitat() != null && !oficinaEditada.getCapacitat().toString().isEmpty())
         {
             oficina.setCapacitat(oficinaEditada.getCapacitat());
         }

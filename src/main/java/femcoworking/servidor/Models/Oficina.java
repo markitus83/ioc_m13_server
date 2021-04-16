@@ -20,9 +20,9 @@ public class Oficina {
     @NotNull
     private Categoria tipus;
     @NotNull
-    private String capacitat;
+    private Integer capacitat;
     @NotNull
-    private double preu;
+    private Double preu;
     private String serveis;
     private Boolean habilitada;
     private String provincia;
@@ -58,19 +58,19 @@ public class Oficina {
         this.tipus = categoria;
     }
     
-    public String getCapacitat() {
+    public Integer getCapacitat() {
         return capacitat;
     }
 
-    public void setCapacitat(String capacitat) {
+    public void setCapacitat(Integer capacitat) {
         this.capacitat = capacitat;
     }
 
-    public double getPreu() {
+    public Double getPreu() {
         return preu;
     }
 
-    public void setPreu(double preu) {
+    public void setPreu(Double preu) {
         this.preu = preu;
     }
 
