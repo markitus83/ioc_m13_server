@@ -1,0 +1,13 @@
+/Users/marc/MEGAsync/ioc/M13/fem_coworking_server/src/main/java/femcoworking/servidor/Exceptions/UsuariNotAllowedException.java
+/Users/marc/MEGAsync/ioc/M13/fem_coworking_server/src/main/java/femcoworking/servidor/Models/PeticioCanviContrasenya.java
+/Users/marc/MEGAsync/ioc/M13/fem_coworking_server/src/main/java/femcoworking/servidor/Models/Usuari.java
+/Users/marc/MEGAsync/ioc/M13/fem_coworking_server/src/main/java/femcoworking/servidor/Models/DadesAcces.java
+/Users/marc/MEGAsync/ioc/M13/fem_coworking_server/src/main/java/femcoworking/servidor/Models/Categoria.java
+/Users/marc/MEGAsync/ioc/M13/fem_coworking_server/src/main/java/femcoworking/servidor/Models/PeticioDeshabilitarUsuari.java
+/Users/marc/MEGAsync/ioc/M13/fem_coworking_server/src/main/java/femcoworking/servidor/Exceptions/BadRequestException.java
+/Users/marc/MEGAsync/ioc/M13/fem_coworking_server/src/main/java/femcoworking/servidor/Controllers/UsuariController.java
+/Users/marc/MEGAsync/ioc/M13/fem_coworking_server/src/main/java/femcoworking/servidor/Exceptions/UsuariNotFoundException.java
+/Users/marc/MEGAsync/ioc/M13/fem_coworking_server/src/main/java/femcoworking/servidor/ServidorApplication.java
+/Users/marc/MEGAsync/ioc/M13/fem_coworking_server/src/main/java/femcoworking/servidor/Persistence/UsuariRepository.java
+/Users/marc/MEGAsync/ioc/M13/fem_coworking_server/src/main/java/femcoworking/servidor/Services/ControlAcces.java
+/Users/marc/MEGAsync/ioc/M13/fem_coworking_server/src/main/java/femcoworking/servidor/Models/Rol.java
