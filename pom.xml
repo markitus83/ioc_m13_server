@@ -98,6 +98,12 @@
             <artifactId>unirest-objectmapper-jackson</artifactId>
             <version>3.11.11</version>
         </dependency>
+        <dependency>
+            <groupId>javax.json.bind</groupId>
+            <artifactId>javax.json.bind-api</artifactId>
+            <version>1.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
 
     <build>

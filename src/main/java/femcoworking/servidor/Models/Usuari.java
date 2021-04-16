@@ -68,6 +68,10 @@ public class Usuari {
 
     public Usuari() { }
 
+    public Usuari(String idUsuari) {
+        this.idUsuari = idUsuari;
+    }
+
     public String getIdUsuari() {
         return idUsuari;
     }

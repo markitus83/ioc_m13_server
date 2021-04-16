@@ -32,6 +32,13 @@ public class Oficina {
     private Date dataUltimaEdicio;
     private Boolean eliminat;
 
+    public Oficina() {
+    }
+
+    public Oficina(String idOficina) {
+        this.idOficina = idOficina;
+    }
+
     public String getIdOficina() {
         return idOficina;
     }
