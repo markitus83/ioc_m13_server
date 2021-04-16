@@ -11,7 +11,7 @@
     <groupId>femcoworking</groupId>
     <artifactId>FEM-Coworking-server</artifactId>
     <version>0.0.1</version>
-    <name>FEM-Coworking-server</name>
+    <name>FEM-Coworking-server-marc</name>
     <description></description>
 
     <properties>
