@@ -6,6 +6,7 @@ import femcoworking.servidor.Exceptions.UsuariNotAllowedException;
 import femcoworking.servidor.Models.Oficina;
 import femcoworking.servidor.Models.OficinaVisualitzacio;
 import femcoworking.servidor.Models.PeticioAltaOficina;
+import femcoworking.servidor.Models.PeticioLlistatOficinesDisponibles;
 import femcoworking.servidor.Models.Rol;
 import femcoworking.servidor.Models.Usuari;
 import femcoworking.servidor.Persistence.OficinaRepository;
@@ -96,6 +97,39 @@ public class OficinaController {
 
         log.trace("Retornada llista d'Oficines");
         return oficinesAMostrar;
+    }
+    
+    /**
+     * L'usuari client a través de la seva interficie demana llistat d'oficines
+     * disponibles per a poder fer reserves
+     * @param peticio
+     * @param codiAcces
+     * @return 
+     */
+    @PostMapping("/oficinesdisponibles/{codiAcces}")
+    public List<OficinaVisualitzacio> llistarOficinesDisponibles(
+        @RequestBody PeticioLlistatOficinesDisponibles peticio,
+        @PathVariable String codiAcces
+    ) {
+        log.trace("Petició de llistar productes del codi " + codiAcces);
+
+        String idUsuari = controlAcces.ValidarCodiAcces(codiAcces);
+        Usuari usuari = usuariRepository.findByIdUsuari(idUsuari);
+
+        List<Oficina> oficines = new ArrayList<>();
+
+        if (usuari.getRol() == Rol.CLIENT)
+        {
+            oficines = oficinaRepository.findOficinesDisponibles(
+                peticio.getDataInici(),
+                peticio.getDataFi()
+            );
+        }
+
+        List<OficinaVisualitzacio> oficinesDisponibles = mapper.OficinesAMostrar(oficines);
+
+        log.trace("Retornada llista d'Oficines disponibles");
+        return oficinesDisponibles;
     }
     
     /**

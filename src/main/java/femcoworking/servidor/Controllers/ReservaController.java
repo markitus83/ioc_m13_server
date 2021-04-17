@@ -89,7 +89,6 @@ public class ReservaController {
         
         if (usuari.getRol() == Rol.CLIENT) {
             reserves = reservaRepository.findAllByIdUsuari(usuari);
-            //reserves = reservaRepository.findAll();
         } else {
             reserves = reservaRepository.findAll();
         }
