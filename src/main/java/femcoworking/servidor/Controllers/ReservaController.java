@@ -9,9 +9,11 @@ package femcoworking.servidor.Controllers;
 import femcoworking.servidor.Controllers.UsuariController;
 import femcoworking.servidor.Exceptions.BadRequestException;
 import femcoworking.servidor.Exceptions.OficinaNotFoundException;
+import femcoworking.servidor.Exceptions.ReservaNotFoundException;
 import femcoworking.servidor.Exceptions.UsuariNotAllowedException;
 import femcoworking.servidor.Models.Oficina;
 import femcoworking.servidor.Models.OficinaVisualitzacio;
+import femcoworking.servidor.Models.PeticioEsborrarReserva;
 import femcoworking.servidor.Models.PeticioReservaOficina;
 import femcoworking.servidor.Models.Reserva;
 import femcoworking.servidor.Models.Rol;
@@ -95,6 +97,22 @@ public class ReservaController {
         
         log.info("Retornada llista de reserves");
         return reserves;
+    }
+    
+    @DeleteMapping("/esborrarreserva/{codiAcces}")
+    public String esborrarReserva(
+        @RequestBody PeticioEsborrarReserva peticio,
+        @PathVariable String codiAcces
+    ) {
+        log.info("Petició de esborrar reserva amb codi " + peticio.getIdReserva());
+        
+        Reserva reserva = reservaRepository.findByIdReserva(peticio.getIdReserva());
+        if (null == reserva) {
+            throw new ReservaNotFoundException(peticio.getIdReserva());
+        }
+        reservaRepository.delete(reserva);
+        
+        return "Reserva eliminada";
     }
 
     private void ValidarCampsNovaReserva(Reserva novaReserva) {
