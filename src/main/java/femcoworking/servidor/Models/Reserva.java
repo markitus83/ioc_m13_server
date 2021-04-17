@@ -22,10 +22,10 @@ public class Reserva {
     private String idReserva;
     @NotNull
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Date data_inici_reserva;
+    private Date dataIniciReserva;
     @NotNull
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Date data_fi_reserva;
+    private Date dataFiReserva;
     @ManyToOne
     @JoinColumn(name = "idOficina", referencedColumnName = "idOficina")
     private Oficina idOficina;
@@ -58,19 +58,19 @@ public class Reserva {
     }
       
     public Date getDataIniciReserva() {
-        return data_inici_reserva;
+        return dataIniciReserva;
     }
 
     public void setDataIniciReserva(Date data_inici_reserva) {
-        this.data_inici_reserva = data_inici_reserva;
+        this.dataIniciReserva = data_inici_reserva;
     }
     
     public Date getDataFiReserva() {
-        return data_fi_reserva;
+        return dataFiReserva;
     }
 
     public void setDataFiReserva(Date data_fi_reserva) {
-        this.data_fi_reserva = data_fi_reserva;
+        this.dataFiReserva = data_fi_reserva;
     }
     
 }
