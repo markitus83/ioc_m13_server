@@ -75,8 +75,27 @@ public class ReservaController {
 
         log.info("Reserva efectuada amb l'identificador " + reservaOficina.getReserva().getIdReserva());
 
-        return "Reserva efectuada amb l'identificador " + reservaOficina.getReserva().getIdReserva();
+        return "Reserva efectuada amb l'identificador " + reservaOficina.getReserva().getIdReserva();    
+    }
     
+    @GetMapping("/reserves/{codiAcces}")
+    public List<Reserva> llistarReserves(@PathVariable String codiAcces) {
+        log.info("Petició de llistar reserves del codi " + codiAcces);
+        
+        String idUsuari = controlAcces.ValidarCodiAcces(codiAcces);
+        Usuari usuari = usuariRepository.findByIdUsuari(idUsuari);
+        
+        List<Reserva> reserves = new ArrayList<>();
+        
+        if (usuari.getRol() == Rol.CLIENT) {
+            reserves = reservaRepository.findAllByIdUsuari(usuari);
+            //reserves = reservaRepository.findAll();
+        } else {
+            reserves = reservaRepository.findAll();
+        }
+        
+        log.info("Retornada llista de reserves");
+        return reserves;
     }
 
     private void ValidarCampsNovaReserva(Reserva novaReserva) {
