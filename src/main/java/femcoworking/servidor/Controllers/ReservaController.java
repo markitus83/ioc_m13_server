@@ -110,16 +110,16 @@ public class ReservaController {
         return reserves;
     }
     
-    @DeleteMapping("/esborrarreserva/{codiAcces}")
+    @DeleteMapping("/esborrarreserva/{codiAcces}/{idReserva}")
     public String esborrarReserva(
-        @RequestBody PeticioEsborrarReserva peticio,
-        @PathVariable String codiAcces
+        @PathVariable String codiAcces,
+        @PathVariable String idReserva
     ) {
-        log.info("Petició de esborrar reserva amb codi " + peticio.getIdReserva());
+        log.info("Petició de esborrar reserva amb codi " + idReserva);
         
-        Reserva reserva = reservaRepository.findByIdReserva(peticio.getIdReserva());
+        Reserva reserva = reservaRepository.findByIdReserva(idReserva);
         if (null == reserva) {
-            throw new ReservaNotFoundException(peticio.getIdReserva());
+            throw new ReservaNotFoundException(idReserva);
         }
         reservaRepository.delete(reserva);
         
