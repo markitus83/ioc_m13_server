@@ -11,7 +11,9 @@ package femcoworking.servidor.Models;
  */
 public class PeticioReservaOficina {
     private String codiAcces;
-    private Reserva reserva;
+    private String idOficina;
+    private String dataIniciReserva;
+    private String dataFiReserva;
 
     public String getCodiAcces() {
         return codiAcces;
@@ -19,14 +21,30 @@ public class PeticioReservaOficina {
 
     public void setCodiAcces(String codiAcces) {
         this.codiAcces = codiAcces;
+    }  
+
+    public String getIdOficina() {
+        return idOficina;
     }
 
-    public Reserva getReserva() {
-        return reserva;
+    public void setIdOficina(String idOficina) {
+        this.idOficina = idOficina;
     }
 
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
-    }   
+    public String getDataIniciReserva() {
+        return dataIniciReserva;
+    }
+
+    public void setDataIniciReserva(String dataIniciReserva) {
+        this.dataIniciReserva = dataIniciReserva;
+    }
+
+    public String getDataFiReserva() {
+        return dataFiReserva;
+    }
+
+    public void setDataFiReserva(String dataFiReserva) {
+        this.dataFiReserva = dataFiReserva;
+    }
 }
     

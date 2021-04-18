@@ -23,6 +23,9 @@ import femcoworking.servidor.Persistence.ReservaRepository;
 import femcoworking.servidor.Persistence.UsuariRepository;
 import femcoworking.servidor.Services.ControlAcces;
 import femcoworking.servidor.Services.Mapper;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.domain.Specification;
@@ -61,23 +64,31 @@ public class ReservaController {
     }
 
     @PostMapping("/reservaoficina")
-    public String reservaOficina(@RequestBody PeticioReservaOficina reservaOficina) {
+    public String reservaOficina(@RequestBody PeticioReservaOficina reservaOficina) throws ParseException {
           
-        log.trace("Rebuda petició de reserva d'oficina");        
+        log.trace("Rebuda petició de reserva d'oficina");    
+        log.info("Rebuda petició de reserva d'oficina # codiAcces " + reservaOficina.getCodiAcces());
         
-        Reserva reserva = reservaOficina.getReserva();
+        String idUsuari = controlAcces.ValidarCodiAcces(reservaOficina.getCodiAcces());
+        String idOficina = reservaOficina.getIdOficina();
+        String dataInici = reservaOficina.getDataIniciReserva();
+        String dataFi = reservaOficina.getDataFiReserva();
+        
+        Reserva reserva = new Reserva();
         InicialitzarCampsNovaReserva(
-            reservaOficina.getReserva(),
-            reservaOficina.getReserva().getIdUsuari().getIdUsuari(),
-            reservaOficina.getReserva().getIdOficina().getIdOficina()
+            reserva,
+            idUsuari,
+            idOficina,
+            dataInici,
+            dataFi
         );
-        ValidarCampsNovaReserva(reservaOficina.getReserva());
+        ValidarCampsNovaReserva(reserva);
 
-        reservaRepository.save(reservaOficina.getReserva());
+        reservaRepository.save(reserva);
 
-        log.info("Reserva efectuada amb l'identificador " + reservaOficina.getReserva().getIdReserva());
+        log.info("Reserva efectuada amb l'identificador " + reserva.getIdReserva());
 
-        return "Reserva efectuada amb l'identificador " + reservaOficina.getReserva().getIdReserva();    
+        return "Reserva efectuada amb l'identificador " + reserva.getIdReserva();    
     }
     
     @GetMapping("/reserves/{codiAcces}")
@@ -117,32 +128,51 @@ public class ReservaController {
 
     private void ValidarCampsNovaReserva(Reserva novaReserva) {
 
-        if (novaReserva == null)
-        {
+        if (novaReserva == null) {
             throw new BadRequestException("Reserva no informada");
         }
 
-        if (novaReserva.getDataIniciReserva() == null)
-        {
+        if (novaReserva.getDataIniciReserva() == null) {
             throw new BadRequestException("El camp data_inici_reserva és obligatori");
         }
         
-        if (novaReserva.getDataFiReserva() == null)
-        {
+        if (novaReserva.getDataFiReserva() == null) {
             throw new BadRequestException("El camp data_fi_reseva és obligatori");
         }
         
         if (novaReserva.getDataIniciReserva().compareTo(novaReserva.getDataFiReserva()) > 0) {
             throw new BadRequestException("El camp data_fi_reseva és anterior a data_inici_reserva");
         }
+        
+        if (novaReserva.getIdOficina() == null) {
+            throw new BadRequestException("Oficina no informada");
+        }
+        
+        if (novaReserva.getIdUsuari() == null) {
+            throw new BadRequestException("Usuari no informat");
+        }
     }
 
-    private void InicialitzarCampsNovaReserva(Reserva novaReserva, String idUsuari, String idOficina) {
+    private void InicialitzarCampsNovaReserva(
+        Reserva novaReserva, 
+        String idUsuari,
+        String idOficina,
+        String dataInici,
+        String dataFi
+    ) throws ParseException {
+        novaReserva.setIdReserva(UUID.randomUUID().toString());
+        
         Usuari usuari = usuariRepository.findByIdUsuari(idUsuari);
         novaReserva.setIdUsuari(usuari);
+
         Oficina oficina = oficinaRepository.findByIdOficina (idOficina);
         novaReserva.setIdOficina (oficina);
-        novaReserva.setIdReserva(UUID.randomUUID().toString());
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date inici = dateFormat.parse(dataInici);
+        Date fi = dateFormat.parse(dataFi);
+        novaReserva.setDataIniciReserva(inici);
+        novaReserva.setDataFiReserva(fi);
     }
     
     
